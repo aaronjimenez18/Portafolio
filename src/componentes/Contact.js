@@ -80,7 +80,7 @@ export const Contact = () => {
             </TrackVisibility>
           </Col>
           <Col size={12} md={6}>
-            <TrackVisibility>
+            <TrackVisibility once>
               {({ isVisible }) => (
                 <div
                   className={

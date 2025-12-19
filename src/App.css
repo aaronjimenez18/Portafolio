@@ -867,6 +867,102 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   letter-spacing: 0.5px;
   margin-top: 20px;
 }
+.loader-container {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at bottom, #0b1020, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 99999;
+}
+.moon {
+  position: absolute;
+  top: 80px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff, #ccc);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+.loader {
+  width: 32px;
+  height: 90px;
+  position: absolute;
+  bottom: 120px;
+  border-radius: 50% 50% 0 0;
+  border-bottom: 10px solid #ff3d00;
+  background-color: #fff;
+  background-image: radial-gradient(
+      ellipse at center,
+      #fff 34%,
+      #ff3d00 35%,
+      #ff3d00 54%,
+      #fff 55%
+    ),
+    linear-gradient(#ff3d00 10px, transparent 0);
+  background-size: 28px 28px;
+  background-position: center 20px, center 2px;
+  background-repeat: no-repeat;
+}
+.rocket {
+  animation: rocketHitMoon 2.6s ease-in-out forwards;
+}
+@keyframes rocketHitMoon {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: translateY(-120px);
+  }
+
+  70% {
+    transform: translateY(-260px);
+  }
+
+  80% {
+    transform: translateY(-280px) rotate(15deg);
+  }
+
+  100% {
+    transform: translateY(-280px) scale(0);
+    opacity: 0;
+  }
+}
+.explosion {
+  position: absolute;
+  top: 110px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffdf00, #ff3d00, transparent);
+  opacity: 0;
+  animation: moonExplosion 2.6s ease-out forwards;
+}
+@keyframes moonExplosion {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  75% {
+    opacity: 0;
+  }
+
+  85% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
 @media (max-width: 576px) {
   /* GENERAL */
   h1 {
