@@ -980,3 +980,22 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     font-size: 70px;
   }
 }
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background-color: #121212;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 0 0 20px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
+.banner {
+  position: relative;
+  z-index: 1;
+}
