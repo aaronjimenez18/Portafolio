@@ -4,7 +4,6 @@ import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
-import { useReveal } from "../hooks/useReveal";
 import { useParallax } from "../hooks/useParallax";
 
 const toRotate = ["Estudiante", "Programador", "Ingeniero"];
@@ -15,8 +14,6 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(100);
-  const [titleRef, titleVisible] = useReveal();
-  const [imgRef] = useReveal({ threshold: 0.2 });
   const parallaxImgRef = useParallax(0.2);
 
   const tick = useCallback(() => {
