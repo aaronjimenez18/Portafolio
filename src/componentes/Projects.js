@@ -6,6 +6,8 @@ import projImg3 from "../assets/img/zenith-captura.JPG";
 import colorSharp2 from "../assets/img/color-sharp2.png";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import { useReveal } from "../hooks/useReveal";
+import { useParallax } from "../hooks/useParallax";
 
 export const Projects = () => {
   const projects = [
@@ -30,8 +32,11 @@ export const Projects = () => {
     },
   ];
 
+  const [sectionRef, sectionVisible] = useReveal({ threshold: 0.1 });
+  const parallaxBgRef = useParallax(0.2);
+
   return (
-    <section className="project" id="projects">
+    <section className="project" id="projects" ref={sectionRef}>
       <Container>
         <Row>
           <Col size={12}>
@@ -50,7 +55,6 @@ export const Projects = () => {
                   </p>
 
                   <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                    {/* CONTENEDOR DE CONTENIDO */}
                     <div className="project-content">
                       <Tab.Content
                         className={
@@ -62,7 +66,11 @@ export const Projects = () => {
                         <Tab.Pane eventKey="first">
                           <Row className="justify-content-center">
                             {projects.map((project, index) => (
-                              <ProjectCard key={index} {...project} />
+                              <ProjectCard
+                                key={index}
+                                {...project}
+                                className={`reveal slide-up delay-${index + 1} ${sectionVisible ? "visible" : ""}`}
+                              />
                             ))}
                           </Row>
                         </Tab.Pane>
@@ -77,9 +85,10 @@ export const Projects = () => {
       </Container>
 
       <img
-        className="background-image-right"
+        className="background-image-right parallax"
         src={colorSharp2}
         alt="background"
+        ref={parallaxBgRef}
       />
     </section>
   );

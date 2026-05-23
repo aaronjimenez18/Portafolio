@@ -4,6 +4,8 @@ import headerImg from "../assets/img/header-img.svg";
 import { ArrowRightCircle } from "react-bootstrap-icons";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
+import { useReveal } from "../hooks/useReveal";
+import { useParallax } from "../hooks/useParallax";
 
 const toRotate = ["Estudiante", "Programador", "Ingeniero"];
 const period = 1500;
@@ -13,6 +15,9 @@ export const Banner = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [text, setText] = useState("");
   const [delta, setDelta] = useState(100);
+  const [titleRef, titleVisible] = useReveal();
+  const [imgRef] = useReveal({ threshold: 0.2 });
+  const parallaxImgRef = useParallax(0.2);
 
   const tick = useCallback(() => {
     let i = loopNum % toRotate.length;
@@ -84,17 +89,19 @@ export const Banner = () => {
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__zoomIn" : ""
-                  }
-                >
-                  <img src={headerImg} alt="Header Img" />
-                </div>
-              )}
-            </TrackVisibility>
+            <div ref={parallaxImgRef} className="parallax">
+              <TrackVisibility>
+                {({ isVisible }) => (
+                  <div
+                    className={
+                      isVisible ? "animate__animated animate__zoomIn" : ""
+                    }
+                  >
+                    <img src={headerImg} alt="Header Img" />
+                  </div>
+                )}
+              </TrackVisibility>
+            </div>
           </Col>
         </Row>
       </Container>

@@ -22,7 +22,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 75px;
 }
 
@@ -1094,4 +1093,49 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner {
   position: relative;
   z-index: 1;
+}
+
+/************ Reveal Animations ************/
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.reveal.fade-in {
+  transform: translateY(0);
+}
+
+.reveal.slide-up {
+  transform: translateY(40px);
+}
+
+.reveal.slide-up.visible {
+  transform: translateY(0);
+}
+
+.reveal.scale-up {
+  transform: scale(0.7);
+}
+
+.reveal.scale-up.visible {
+  transform: scale(1);
+}
+
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+.reveal.delay-4 { transition-delay: 0.4s; }
+.reveal.delay-5 { transition-delay: 0.5s; }
+.reveal.delay-6 { transition-delay: 0.6s; }
+.reveal.delay-7 { transition-delay: 0.7s; }
+
+/************ Parallax ************/
+.parallax {
+  will-change: transform;
+  transition: transform 0.1s linear;
 }

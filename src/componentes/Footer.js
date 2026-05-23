@@ -4,12 +4,17 @@ import logo from "../assets/img/logo-img.png";
 import navIcon1 from "../assets/img/nav-icon1.svg";
 import navIcon2 from "../assets/img/navIcon2.svg";
 import navIcon3 from "../assets/img/nav-icon3.svg";
+import { useReveal } from "../hooks/useReveal";
 
 export const Footer = () => {
+  const [footerRef, footerVisible] = useReveal({ threshold: 0.1 });
+
   return (
-    <footer className="footer">
+    <footer className="footer" ref={footerRef}>
       <Container>
-        <Row className="align-items-center">
+        <Row
+          className={`align-items-center reveal fade-in ${footerVisible ? "visible" : ""}`}
+        >
           <Col size={12} sm={6}>
             <img src={logo} alt="Logo" />
           </Col>

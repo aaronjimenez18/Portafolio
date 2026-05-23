@@ -1,9 +1,20 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import contactImg from "../assets/img/contact-img.svg";
 import "animate.css";
 import TrackVisibility from "react-on-screen";
 import emailjs from "@emailjs/browser";
+import { useReveal } from "../hooks/useReveal";
+import { useParallax } from "../hooks/useParallax";
+
+function mergeRefs(...refs) {
+  return (el) => {
+    refs.forEach((ref) => {
+      if (typeof ref === "function") ref(el);
+      else if (ref) ref.current = el;
+    });
+  };
+}
 
 export const Contact = () => {
   const formInitialDetails = {
@@ -16,6 +27,10 @@ export const Contact = () => {
   const [formDetails, setFormDetails] = useState(formInitialDetails);
   const [buttonText, setButtonText] = useState("Enviar");
   const [status, setStatus] = useState({});
+  const [imgRef, imgVisible] = useReveal({ threshold: 0.2 });
+  const [formRef] = useReveal({ threshold: 0.1 });
+  const parallaxImgRef = useParallax(0.1);
+  const combinedImgRef = mergeRefs(imgRef, parallaxImgRef);
 
   const onFormUpdate = (category, value) => {
     setFormDetails({
@@ -28,7 +43,6 @@ export const Contact = () => {
     e.preventDefault();
     setButtonText("Sending...");
 
-    // Credenciales
     const serviceID = "service_kn2ahr4";
     const templateID = "template_brt0a9l";
     const publicKey = "pqX8MsZjzbI83MIiU";
@@ -65,19 +79,24 @@ export const Contact = () => {
       <Container>
         <Row className="align-items-center">
           <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <img
-                  className={
-                    isVisible
-                      ? "animate__animated animate__zoomIn floating-img"
-                      : "floating-img"
-                  }
-                  src={contactImg}
-                  alt="Contact Us"
-                />
-              )}
-            </TrackVisibility>
+            <div
+              ref={combinedImgRef}
+              className={`reveal scale-up ${imgVisible ? "visible" : ""}`}
+            >
+              <TrackVisibility>
+                {({ isVisible }) => (
+                  <img
+                    className={
+                      isVisible
+                        ? "animate__animated animate__zoomIn floating-img"
+                        : "floating-img"
+                    }
+                    src={contactImg}
+                    alt="Contact Us"
+                  />
+                )}
+              </TrackVisibility>
+            </div>
           </Col>
           <Col size={12} md={6}>
             <TrackVisibility once>
@@ -86,6 +105,7 @@ export const Contact = () => {
                   className={
                     isVisible ? "animate__animated animate__fadeIn" : ""
                   }
+                  ref={formRef}
                 >
                   <h2>Contáctame</h2>
                   <form onSubmit={handleSubmit}>

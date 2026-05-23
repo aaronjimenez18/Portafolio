@@ -6,9 +6,10 @@ export const ProjectCard = ({
   imgUrl,
   projectUrl,
   githubUrl,
+  className = "",
 }) => {
   return (
-    <Col size={12} sm={6} md={4}>
+    <Col size={12} sm={6} md={4} className={className}>
       <div className="proj-imgbx">
         <img src={imgUrl} alt={title} />
         <div className="proj-txtx">
