@@ -1,8 +1,5 @@
 Portafolio Personal
 
-Este proyecto es mi portafolio personal desarrollado con React, donde presento mi perfil profesional, habilidades y proyectos.
-Cuenta con animaciones suaves, diseño responsive y un formulario de contacto funcional integrado con EmailJS.
-
 Tecnologías utilizadas
 
 React-Bootstrap
